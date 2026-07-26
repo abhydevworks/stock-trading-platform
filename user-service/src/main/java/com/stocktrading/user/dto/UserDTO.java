@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -18,13 +17,16 @@ import java.util.UUID;
 public class UserDTO {
     private UUID id;
     private String email;
-    private String username;
     private String firstName;
     private String lastName;
-    private String phoneNumber;
-    private LocalDate dateOfBirth;
-    private String kycStatus;
-    private String accountStatus;
+    private String phone;
+    private String address;
+    private String city;
+    private String country;
+    private String zipCode;
+    private String status;
+    private Boolean emailVerified;
+    private Boolean twoFactorEnabled;
     private LocalDateTime createdAt;
-    private LocalDateTime lastLogin;
+    private LocalDateTime updatedAt;
 }

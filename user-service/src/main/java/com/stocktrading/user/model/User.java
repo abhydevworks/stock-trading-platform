@@ -6,10 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -26,26 +23,30 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @Column(unique = true, nullable = false)
-    private String username;
+    @Column(nullable = false)
+    private String password;
 
     @Column(nullable = false)
-    private String passwordHash;
-
     private String firstName;
+
+    @Column(nullable = false)
     private String lastName;
-    private String phoneNumber;
-    private LocalDate dateOfBirth;
+
+    private String phone;
+    private String address;
+    private String city;
+    private String country;
+    private String zipCode;
 
     @Enumerated(EnumType.STRING)
     @Builder.Default
-    private KYCStatus kycStatus = KYCStatus.PENDING;
+    private UserStatus status = UserStatus.ACTIVE;
 
-    private LocalDateTime kycVerifiedDate;
-
-    @Enumerated(EnumType.STRING)
     @Builder.Default
-    private AccountStatus accountStatus = AccountStatus.ACTIVE;
+    private Boolean emailVerified = false;
+
+    @Builder.Default
+    private Boolean twoFactorEnabled = false;
 
     @Column(nullable = false, updatable = false)
     @Builder.Default
@@ -54,17 +55,7 @@ public class User {
     @Builder.Default
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    private LocalDateTime lastLogin;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Builder.Default
-    private Set<UserRole> roles = new HashSet<>();
-
-    public enum KYCStatus {
-        PENDING, APPROVED, REJECTED, UNDER_REVIEW
-    }
-
-    public enum AccountStatus {
-        ACTIVE, SUSPENDED, CLOSED
+    public enum UserStatus {
+        ACTIVE, INACTIVE, SUSPENDED, DELETED
     }
 }

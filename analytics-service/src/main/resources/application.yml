@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: analytics-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/stock_trading
+    username: admin
+    password: password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: analytics-service-group
+
+server:
+  port: 8087
+
+logging:
+  level:
+    com.stocktrading: DEBUG
