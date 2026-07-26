@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: api-gateway
+  redis:
+    host: localhost
+    port: 6379
+  cloud:
+    gateway:
+      enabled: true
+      default-filters:
+        - name: GlobalLoggingFilter
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+jwt:
+  secret: your-super-secret-key-change-this-in-production-environment
+  expiration: 86400000
+
+logging:
+  level:
+    com.stocktrading: DEBUG
+    org.springframework.cloud.gateway: DEBUG
